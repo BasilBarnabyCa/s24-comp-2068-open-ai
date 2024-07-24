@@ -4,13 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-import config from "./config/globals.js";
-
-// OpenAI API import and initialization
-import OpenAI from "openai";
-var openai = new OpenAI();
-var openaiApiKey = config.ApiKeys.OpenAI;
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
