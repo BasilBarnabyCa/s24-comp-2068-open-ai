@@ -1,39 +1,52 @@
+Copied!
 <div class="row flex-grow-1">
-  <div class="col-lg-3 d-flex">
-    <div class="card w-100">
-      <div class="card-body">
-        <h5 class="card-title mb-4">History</h5>
-        <ul class="navbar-nav navbar-dark">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contributors</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link pe-0" href="#">Documentation</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-9 d-flex">
-    <div class="card w-100">
-      <div class="card-body">
-        <form action="/process-resume" method="post">
-          <div class="input-group dark-input-group mb-4">
-            <span class="input-group-text">Upload Icon</span>
-            <textarea
-              name="resumeText"
-              class="form-control"
-              aria-label="With textarea"
-			  placeholder="Paste resume text here..."
-            ></textarea>
-          </div>
-          <button class="btn btn-sm btn-secondary" type="submit">Send</button>
-        </form>
-        <h2>Results</h2>
-        {{#if suggestions}}
-          <p>{{suggestions}}</p>
-        {{/if}}
-      </div>
-    </div>
-  </div>
+	<div class="col-lg-3 d-flex">
+		<div class="card w-100">
+			<div class="card-body">
+				<h5 class="card-title mb-4">History</h5>
+				<ul class="navbar-nav navbar-dark">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Contributors</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link pe-0" href="#">Documentation</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-9 d-flex">
+		<div class="card w-100">
+			<div class="card-body">
+				<form id="resumeForm">
+					<div class="input-group dark-input-group mb-4">
+						<span class="input-group-text">Upload Icon</span>
+						<textarea name="resumeText" class="form-control" aria-label="With textarea"
+							placeholder="Paste resume text here..."></textarea>
+					</div>
+					<button class="btn btn-sm btn-secondary" type="submit">Send</button>
+				</form>
+				<h2>Results</h2>
+				<div id="results"></div>
+			</div>
+		</div>
+	</div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+	document.getElementById('resumeForm').addEventListener('submit', function (e) {
+		e.preventDefault();
+		const formData = new FormData(this);
+		const resumeText = formData.get('resumeText');
+
+		axios.post('/process-resume', { resumeText })
+			.then(response => {
+				document.getElementById('results').innerHTML = `<p>${response.data.suggestions}</p>`;
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				document.getElementById('results').innerHTML = `<p>An error occurred. Please try again.</p>`;
+			});
+	});
+</script>
