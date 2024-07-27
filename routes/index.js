@@ -54,7 +54,7 @@ router.post("/process-data", fileService.uploadMiddleware, async (req, res, next
 			salaryExpectations: suggestions.salaryExpectations,
 		  };
 
-		  console.log(suggestions.salaryExpectations)
+		//   console.log(suggestions.salaryExpectations)
 		  
 		  res.json({ formattedData });
 
