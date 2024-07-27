@@ -27,7 +27,12 @@
 					<input type="file" class="form-control-file d-none" id="resumeFile" name="resumeFile"
 						accept=".pdf, .docx">
 					<button class="btn btn-sm btn-secondary position-absolute shadow" id="sendButton" type="submit"><i
-							class="fa-solid fa-arrow-up"></i></button>
+							class="fa-solid fa-arrow-up"></i>
+						<div class="spinner-border spinner-border-sm text-light d-none" role="status"
+							id="loadingSpinner">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</button>
 				</form>
 				<div id="results"></div>
 			</div>
@@ -38,7 +43,7 @@
 	document.getElementById('uploadButton').addEventListener('click', function () {
 		document.getElementById('resumeFile').click();
 	});
-	
+
 	//document.getElementById('resumeFile').addEventListener('change', function () {
 	// Optionally show the file name or handle the file selection
 	//console.log(this.files[0].name);
@@ -49,6 +54,8 @@
 		const formData = new FormData(this);
 		const fileInput = document.getElementById('resumeFile');
 		const textInput = document.getElementById('resumeText').value.trim();
+		const loadingSpinner = document.getElementById('loadingSpinner');
+		const upArrowIcon = sendButton.querySelector('.fa-arrow-up');
 
 		if (fileInput.files.length > 0) {
 			formData.append('resumeFile', fileInput.files[0]);
@@ -60,15 +67,28 @@
 			return;
 		}
 
+		// Show spinner, hide arrow, disable button
+		upArrowIcon.classList.add('d-none');
+		loadingSpinner.classList.remove('d-none');
+		sendButton.disabled = true;
+
 		axios.post('/process-data', formData)
 			.then(response => {
 				const formattedData = response.data.formattedData;
 				updateResultsContainer(formattedData);
 				loadSuggestions();
+
+				loadingSpinner.classList.add('d-none');
+				upArrowIcon.classList.remove('d-none');
+				sendButton.disabled = false;
 			})
 			.catch(error => {
 				console.error('Error:', error);
 				document.getElementById('results').innerHTML = '<p>An error occurred. Please try again.</p>';
+
+				loadingSpinner.classList.add('d-none');
+				upArrowIcon.classList.remove('d-none');
+				sendButton.disabled = false;
 			});
 	});
 
