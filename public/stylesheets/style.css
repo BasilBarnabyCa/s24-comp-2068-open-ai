@@ -21,8 +21,12 @@ h6 {
 
 h4,
 .letter-highlight,
-.history-text {
-	color: #10b981;
+.history-text{
+	color: #10b981 !important;
+}
+
+a:hover {
+	color: #6ee7b7 !important;
 }
 
 .full-height {
