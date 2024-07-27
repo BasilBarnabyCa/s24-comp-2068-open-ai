@@ -39,11 +39,10 @@
 		document.getElementById('resumeFile').click();
 	});
 
-	// TODO: remove
-	document.getElementById('resumeFile').addEventListener('change', function () {
+	//document.getElementById('resumeFile').addEventListener('change', function () {
 		// Optionally show the file name or handle the file selection
-		console.log(this.files[0].name);
-	});
+		//console.log(this.files[0].name);
+	//});
 
 	document.getElementById('resumeForm').addEventListener('submit', function (e) {
 		e.preventDefault();
@@ -87,12 +86,12 @@
 						`).join('<br>')}
 					</p>
 					<h4 class="mt-5">Strong Skills</h4>
-					${Object.entries(formattedData.strongSkills).map(([category, details]) => `
+					 ${formattedData.strongSkills.map((category, index) => `
 						<div>
-						<strong>${category}:</strong>
-						<p>${details.summary}</p>
+						<strong>${category.category}:</strong>
+						<p>${category.summary}</p>
 						<ul>
-							${details.skills.map(skill => `<li>${skill}</li>`).join('')}
+							${category.skills.map(skill => `<li>${skill}</li>`).join('')}
 						</ul>
 						</div>
 					`).join('')}

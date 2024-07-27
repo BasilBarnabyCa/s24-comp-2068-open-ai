@@ -3,25 +3,13 @@ var router = express.Router();
 var appName = "CareerCraft";
 var fileService = require("../services/fileService");
 var openaiService = require("../services/openaiService");
-const e = require("express");
+var Suggestion = require("../models/Suggestion");
+const dbService = require("../services/dbService");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
 	res.render("index", { title: `${appName}` });
 });
-
-// router.post("/process-resume", async (req, res, next) => {
-// 	const { resumeText } = req.body;
-// 	console.log("Resume text:", resumeText);
-
-// 	try {
-// 		const suggestions = await openaiService.getCareerSuggestions(resumeText);
-// 		res.json({ suggestions });
-// 	} catch (error) {
-// 		console.error('Error details:', error.response ? error.response.data : error.message);
-// 		res.status(500).json({ error: "An error occurred while processing your request." });
-// 	}
-// });
 
 router.post("/process-data", fileService.uploadMiddleware, async (req, res, next) => {
 	const file = req.file;
@@ -39,6 +27,10 @@ router.post("/process-data", fileService.uploadMiddleware, async (req, res, next
 		// Process the resume text with OpenAI
 		const apiResponse = await openaiService.getCareerSuggestions(combinedText);
 		const suggestions = JSON.parse(apiResponse);
+		const jsonData = JSON.stringify(suggestions);
+
+		// Save the suggestions using the suggestion service
+		await dbService.saveSuggestion(jsonData);
 
 		const formattedData = {
 			summary: suggestions.summary,
@@ -54,8 +46,6 @@ router.post("/process-data", fileService.uploadMiddleware, async (req, res, next
 			salaryExpectations: suggestions.salaryExpectations,
 		  };
 
-		//   console.log(suggestions.salaryExpectations)
-		  
 		  res.json({ formattedData });
 
 	} catch (error) {
