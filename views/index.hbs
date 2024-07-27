@@ -3,7 +3,7 @@
 		<div class="card w-100">
 			<div class="card-body">
 				<h5 class="card-title mb-4">History</h5>
-				<ul class="navbar-nav navbar-dark">
+				<ul class="navbar-nav navbar-dark" id="suggestionList">
 					<li class="nav-item">
 						<a class="nav-link" href="#">Contributors</a>
 					</li>
@@ -40,8 +40,8 @@
 	});
 
 	//document.getElementById('resumeFile').addEventListener('change', function () {
-		// Optionally show the file name or handle the file selection
-		//console.log(this.files[0].name);
+	// Optionally show the file name or handle the file selection
+	//console.log(this.files[0].name);
 	//});
 
 	document.getElementById('resumeForm').addEventListener('submit', function (e) {
@@ -105,7 +105,7 @@
 					<h4 class="mt-5">Suggested Certifications</h4>
 					<ul>${formattedData.suggestedCertifications.map(cert => `
 					<li>
-						<strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>
+						<strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>RR
 						<p>${cert.description}</p>
 					</li>
 					`).join('')}</ul>
@@ -115,5 +115,102 @@
 				console.error('Error:', error);
 				document.getElementById('results').innerHTML = '<p>An error occurred. Please try again.</p>';
 			});
+	});
+
+	// Load suggestions
+	function loadSuggestions() {
+		axios.get('/suggestions')
+			.then(response => {
+				const suggestions = response.data;
+				const suggestionList = document.getElementById('suggestionList');
+				const maxTitleLength = 25; // Maximum number of characters to display
+
+				suggestionList.innerHTML = suggestions.map(suggestion => {
+					let truncatedTitle = suggestion.title;
+					if (truncatedTitle.length > maxTitleLength) {
+						truncatedTitle = truncatedTitle.substring(0, maxTitleLength) + '...';
+					}
+					return `
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-id="${suggestion._id}">${truncatedTitle}</a>
+                    </li>
+                `;
+				}).join('');
+			})
+			.catch(error => {
+				console.error('Error fetching suggestions:', error);
+				document.getElementById('suggestionList').innerHTML = '<p>An error occurred while fetching suggestions.</p>';
+			});
+	}
+	
+	function loadSuggestionDetails(suggestionId) {
+		axios.get(`/suggestions/${suggestionId}`)
+			.then(response => {
+				const formattedData = response.data.formattedData;
+				const resultsContainer = document.getElementById('results');
+
+				resultsContainer.innerHTML = `
+                <h4>Summary</h4>
+                <p>${formattedData.summary}</p>
+                <h4 class="mt-5">Industry Trends</h4>
+                <p>${formattedData.industryTrends}</p>
+                <h4 class="mt-5">Career Path</h4>
+                <ul>
+                ${formattedData.careerPath.map(item => `
+                    <li>
+                    <strong>${item.role} (${item.percentageMatch}%)</strong>
+                    <p>${item.overview}</p>
+                    </li>
+                `).join('')}
+                </ul>
+                <h4 class="mt-5">Salary Expectations</h4>
+                <p>
+                    ${Object.entries(formattedData.salaryExpectations).map(([role, salaryRange]) => `
+                    <strong>${role}:</strong> ${salaryRange}
+                    `).join('<br>')}
+                </p>
+                <h4 class="mt-5">Strong Skills</h4>
+                 ${formattedData.strongSkills.map((category, index) => `
+                    <div>
+                    <strong>${category.category}:</strong>
+                    <p>${category.summary}</p>
+                    <ul>
+                        ${category.skills.map(skill => `<li>${skill}</li>`).join('')}
+                    </ul>
+                    </div>
+                `).join('')}
+                <h4 class="mt-5">Suggested Learning</h4>
+                <ul>${formattedData.suggestedLearning.map(item => `
+                <li>
+                    <strong>${item.skill}</strong>
+                    <p>${item.explanation}</p>
+                </li>
+                `).join('')}</ul>
+                <h4 class="mt-5">Suggested Certifications</h4>
+                <ul>${formattedData.suggestedCertifications.map(cert => `
+                <li>
+                    <strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>
+                    <p>${cert.description}</p>
+                </li>
+                `).join('')}</ul>
+            `;
+			})
+			.catch(error => {
+				console.error('Error fetching suggestion details:', error);
+				document.getElementById('results').innerHTML = '<p>An error occurred while fetching the suggestion details.</p>';
+			});
+	}
+
+	// Load suggestions on page load
+	document.addEventListener('DOMContentLoaded', loadSuggestions);
+
+	document.getElementById('suggestionList').addEventListener('click', function (event) {
+		if (event.target && event.target.nodeName === 'A') {
+			event.preventDefault();
+			const suggestionId = event.target.getAttribute('data-id');
+			if (suggestionId) {
+				loadSuggestionDetails(suggestionId);
+			}
+		}
 	});
 </script>

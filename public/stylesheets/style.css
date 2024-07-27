@@ -64,3 +64,11 @@ footer {
 	width: 75px;
 	height: auto;
 }
+
+#suggestionList li {
+	margin-bottom: 0.5em;
+}
+
+#suggestionList li a {
+	font-size: 0.85rem;
+}

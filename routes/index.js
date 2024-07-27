@@ -3,7 +3,6 @@ var router = express.Router();
 var appName = "CareerCraft";
 var fileService = require("../services/fileService");
 var openaiService = require("../services/openaiService");
-var Suggestion = require("../models/Suggestion");
 const dbService = require("../services/dbService");
 
 /* GET home page. */
@@ -35,22 +34,48 @@ router.post("/process-data", fileService.uploadMiddleware, async (req, res, next
 		const formattedData = {
 			summary: suggestions.summary,
 			careerPath: suggestions.careerPath.map(item => ({
-			  role: item.role,
-			  percentageMatch: item.percentageMatch,
-			  overview: item.overview,
+				role: item.role,
+				percentageMatch: item.percentageMatch,
+				overview: item.overview,
 			})),
 			strongSkills: suggestions.strongSkills,
 			suggestedLearning: suggestions.suggestedLearning,
 			suggestedCertifications: suggestions.suggestedCertifications,
 			industryTrends: suggestions.industryTrends,
 			salaryExpectations: suggestions.salaryExpectations,
-		  };
+		};
 
-		  res.json({ formattedData });
+		res.json({ formattedData });
 
 	} catch (error) {
 		console.error('Error details:', error.message);
 		res.status(500).json({ error: "An error occurred while processing your request." });
+	}
+});
+
+// Route to fetch suggestions
+router.get("/suggestions", async (req, res) => {
+	try {
+		const suggestions = await Suggestion.find().sort({ createdAt: -1 }).limit(50);
+		res.json(suggestions);
+	} catch (error) {
+		console.error('Error fetching suggestions:', error.message);
+		res.status(500).json({ error: "An error occurred while fetching suggestions." });
+	}
+});
+
+// Route to fetch a single suggestion by ID
+router.get("/suggestions/:id", async (req, res, next) => {
+	const suggestionId = req.params.id;
+	try {
+		const suggestion = await dbService.getSuggestionById(suggestionId);
+		if (!suggestion) {
+			return res.status(404).json({ error: "Suggestion not found." });
+		}
+		res.json({ formattedData: JSON.parse(suggestion.data) });
+	} catch (error) {
+		console.error('Error fetching suggestion:', error.message);
+		res.status(500).json({ error: "An error occurred while fetching the suggestion." });
 	}
 });
 
