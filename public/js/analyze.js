@@ -204,27 +204,46 @@ function loadSuggestionDetails(suggestionId) {
 
 // Delete a suggestion
 function deleteSuggestion(suggestionId) {
-	if (confirm('Are you sure you want to delete this suggestion?')) {
-		axios.delete(`/suggestions/${suggestionId}`)
-			.then(response => {
-				console.log('Suggestion deleted:', suggestionId);
-				loadSuggestions(); // Reload the suggestions list
-			})
-			.catch(error => {
-				console.error('Error deleting suggestion:', error);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(`/suggestions/${suggestionId}`)
+                .then(response => {
+                    console.log('Suggestion deleted:', suggestionId);
+                    loadSuggestions();
+					
+					Toastify({
+						text: "Analysis deleted successfully!",
+						duration: 3000,
+						close: true,
+						gravity: "bottom",
+						position: "right",
+						backgroundColor: "#10b981",
+					}).showToast();
+                })
+                .catch(error => {
+                    console.error('Error deleting suggestion:', error);
 
-				Toastify({
-					text: "An error occurred while trying to delete the suggestion. Please try again.",
-					duration: 5000,
-					close: true,
-					gravity: "bottom",
-					position: "right",
-					backgroundColor: "#ef4444",
-				}).showToast();
-
-			});
-	}
+                    Toastify({
+						text: "An error occurred while trying to delete the suggestion. Please try again.",
+						duration: 5000,
+						close: true,
+						gravity: "bottom",
+						position: "right",
+						backgroundColor: "#ef4444",
+					}).showToast();
+                });
+        }
+    });
 }
+
 
 // Load suggestions on page load
 document.addEventListener('DOMContentLoaded', loadSuggestions);
