@@ -41,7 +41,12 @@
 </div>
 <script>
 	document.getElementById('uploadButton').addEventListener('click', function () {
-		document.getElementById('resumeFile').click();
+		// document.getElementById('resumeFile').click();
+		Swal.fire({
+			text: 'Upload feature coming soon!',
+			icon: 'info',
+			confirmButtonText: 'OK'
+		});
 	});
 
 	//document.getElementById('resumeFile').addEventListener('change', function () {
@@ -63,7 +68,14 @@
 
 
 		if (!fileInput.files.length && !textInput) {
-			document.getElementById('results').innerHTML = '<p>Please provide either resume text or upload a file.</p>';
+			Toastify({
+					text: "Please provide resume text or share something about you.",
+					duration: 5000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#ef4444",
+				}).showToast();
 			return;
 		}
 
@@ -81,14 +93,31 @@
 				loadingSpinner.classList.add('d-none');
 				upArrowIcon.classList.remove('d-none');
 				sendButton.disabled = false;
+
+				Toastify({
+					text: "Resume analyzed successfully!",
+					duration: 3000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#10b981",
+				}).showToast();
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				document.getElementById('results').innerHTML = '<p>An error occurred. Please try again.</p>';
 
 				loadingSpinner.classList.add('d-none');
 				upArrowIcon.classList.remove('d-none');
 				sendButton.disabled = false;
+
+				Toastify({
+					text: `An error occurred: ${error.response?.data?.error || 'Unknown error'}`,
+					duration: 5000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#ef4444",
+				}).showToast();
 			});
 	});
 
@@ -171,7 +200,16 @@
 			})
 			.catch(error => {
 				console.error('Error fetching suggestions:', error);
-				document.getElementById('suggestionList').innerHTML = '<p>An error occurred while fetching suggestions.</p>';
+
+				Toastify({
+					text: "An error occurred while fetching suggestions.",
+					duration: 5000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#ef4444",
+				}).showToast();
+
 			});
 	}
 
@@ -180,10 +218,28 @@
 			.then(response => {
 				const formattedData = response.data.formattedData;
 				updateResultsContainer(formattedData);
+
+				Toastify({
+					text: "Analysis retrieved successfully.",
+					duration: 5000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#10b981",
+				}).showToast();
 			})
 			.catch(error => {
 				console.error('Error fetching suggestion details:', error);
-				document.getElementById('results').innerHTML = '<p>An error occurred while fetching the suggestion details.</p>';
+
+				Toastify({
+					text: "An error occurred while fetching the suggestion details.",
+					duration: 5000,
+					close: true,
+					gravity: "bottom",
+					position: "right",
+					backgroundColor: "#ef4444",
+				}).showToast();
+
 			});
 	}
 
@@ -197,7 +253,16 @@
 				})
 				.catch(error => {
 					console.error('Error deleting suggestion:', error);
-					alert('An error occurred while trying to delete the suggestion. Please try again.');
+
+					Toastify({
+						text: "An error occurred while trying to delete the suggestion. Please try again.",
+						duration: 5000,
+						close: true,
+						gravity: "bottom",
+						position: "right",
+						backgroundColor: "#ef4444",
+					}).showToast();
+
 				});
 		}
 	}
