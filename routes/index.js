@@ -4,6 +4,7 @@ var appName = "CareerCraft";
 var fileService = require("../services/fileService");
 var openaiService = require("../services/openaiService");
 const dbService = require("../services/dbService");
+const Suggestion = require("../models/Suggestion");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

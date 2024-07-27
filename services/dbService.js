@@ -21,6 +21,14 @@ const dbService = {
 			throw new Error('Failed to save suggestion.');
 		}
 	},
+	getAllSuggestions: async () => {
+        try {
+            return await Suggestion.find().sort({ createdAt: -1 });
+        } catch (error) {
+            console.error('Error fetching all suggestions:', error.message);
+            throw new Error('Failed to fetch suggestions.');
+        }
+    },
 	getSuggestionById: async (id) => {
 		try {
 			return await Suggestion.findById(id);
