@@ -125,14 +125,21 @@
 				const suggestionList = document.getElementById('suggestionList');
 				const maxTitleLength = 25; // Maximum number of characters to display
 
+				if (!suggestions.length) {
+					suggestionList.innerHTML = '<li><p class="text-secondary">Nothing to display as yet...</p></li>';
+					return;
+				}
 				suggestionList.innerHTML = suggestions.map(suggestion => {
 					let truncatedTitle = suggestion.title;
 					if (truncatedTitle.length > maxTitleLength) {
 						truncatedTitle = truncatedTitle.substring(0, maxTitleLength) + '...';
 					}
 					return `
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-id="${suggestion._id}">${truncatedTitle}</a>
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <a class="nav-link" href="#" data-id="${suggestion._id}" title="${suggestion.title}">
+                            ${truncatedTitle}
+                        </a>
+                        <i class="fa-regular fa-circle-xmark fa-sm delete-icon" data-id="${suggestion._id}"></i>
                     </li>
                 `;
 				}).join('');
@@ -142,7 +149,7 @@
 				document.getElementById('suggestionList').innerHTML = '<p>An error occurred while fetching suggestions.</p>';
 			});
 	}
-	
+
 	function loadSuggestionDetails(suggestionId) {
 		axios.get(`/suggestions/${suggestionId}`)
 			.then(response => {
@@ -201,6 +208,21 @@
 			});
 	}
 
+	// Delete a suggestion
+	function deleteSuggestion(suggestionId) {
+		if (confirm('Are you sure you want to delete this suggestion?')) {
+			axios.delete(`/suggestions/${suggestionId}`)
+				.then(response => {
+					console.log('Suggestion deleted:', suggestionId);
+					loadSuggestions(); // Reload the suggestions list
+				})
+				.catch(error => {
+					console.error('Error deleting suggestion:', error);
+					alert('An error occurred while trying to delete the suggestion. Please try again.');
+				});
+		}
+	}
+
 	// Load suggestions on page load
 	document.addEventListener('DOMContentLoaded', loadSuggestions);
 
@@ -211,6 +233,12 @@
 			if (suggestionId) {
 				loadSuggestionDetails(suggestionId);
 			}
+		} else if (event.target && event.target.classList.contains('delete-icon')) {
+			const suggestionId = event.target.getAttribute('data-id');
+			if (suggestionId) {
+				deleteSuggestion(suggestionId);
+			}
 		}
 	});
+
 </script>

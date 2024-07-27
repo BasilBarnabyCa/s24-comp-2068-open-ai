@@ -72,3 +72,13 @@ footer {
 #suggestionList li a {
 	font-size: 0.85rem;
 }
+
+.delete-icon {
+	color: #2d2d2da7;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.delete-icon:hover {
+	color: #dc2626;
+}

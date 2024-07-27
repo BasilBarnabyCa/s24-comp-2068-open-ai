@@ -80,4 +80,16 @@ router.get("/suggestions/:id", async (req, res, next) => {
 	}
 });
 
+// New DELETE route for removing a suggestion
+router.delete("/suggestions/:id", async (req, res, next) => {
+    try {
+        const suggestionId = req.params.id;
+        await Suggestion.findByIdAndDelete(suggestionId);
+        res.status(204).send(); // No content, indicating successful deletion
+    } catch (error) {
+        console.error('Error deleting suggestion:', error.message);
+        res.status(500).json({ error: "An error occurred while deleting the suggestion." });
+    }
+});
+
 module.exports = router;
