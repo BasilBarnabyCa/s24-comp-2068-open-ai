@@ -2,7 +2,7 @@
 	<div class="col-lg-3 d-flex">
 		<div class="card w-100">
 			<div class="card-body">
-				<h5 class="card-title mb-4">History</h5>
+				<h5 class="card-title mb-4 history-text">History</h5>
 				<ul class="navbar-nav navbar-dark" id="suggestionList">
 					<li class="nav-item">
 						<a class="nav-link" href="#">Contributors</a>
@@ -22,11 +22,12 @@
 						<span class="input-group-text upload-icon d-flex justify-content-center" id="uploadButton"><i
 								class="fa-solid fa-paperclip"></i></span>
 						<textarea name="resumeText" id="resumeText" class="form-control" aria-label="With textarea"
-							rows="1" placeholder="Paste resume text here..."></textarea>
+							rows="5" placeholder="Paste resume text here..."></textarea>
 					</div>
 					<input type="file" class="form-control-file d-none" id="resumeFile" name="resumeFile"
 						accept=".pdf, .docx">
-					<button class="btn btn-sm btn-secondary" type="submit">Send</button>
+					<button class="btn btn-sm btn-secondary position-absolute shadow" id="sendButton" type="submit"><i
+							class="fa-solid fa-arrow-up"></i></button>
 				</form>
 				<div id="results"></div>
 			</div>
@@ -37,7 +38,7 @@
 	document.getElementById('uploadButton').addEventListener('click', function () {
 		document.getElementById('resumeFile').click();
 	});
-
+	
 	//document.getElementById('resumeFile').addEventListener('change', function () {
 	// Optionally show the file name or handle the file selection
 	//console.log(this.files[0].name);
