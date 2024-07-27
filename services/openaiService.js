@@ -9,7 +9,7 @@ const directive = `Based on the following resume text, generate a JSON response 
 - suggestedLearning (array of objects): Outline additional skills to learn	with a brief explanation as to why. suggestedLearning should only include skill and explanation and should always follow the structure: "suggestedLearning" {skill: "skill name or subject", explanation: "explanation info"}.
 - suggestedCertifications (array of objects): Include relevant industry certifications and courses and links to these resources. suggestedCertifications should only include name, link, and description.
 - industryTrends (string): Describe current industry trends
-- salaryExpectations (object): Provide salary expectations for the jobs chosen in the careerPath object. This MUST BE DONE. salaryExpectations should only have the role and salary range and should always follow this structure: "salaryExpectations": {"career path role" : "min - max"}.
+- salaryExpectations (object): Provide canadian salary expectations for the jobs chosen in the careerPath object and include the currency. This MUST BE DONE. salaryExpectations should only have the role and salary range and should always follow this structure: "salaryExpectations": {"career path role" : "min - max"}.
 Ensure the response is valid JSON without any additional text or formatting characters like \`json\` or \`text\` and non-whitespace characters. Make sure there are no unterminated strings or missing commas. Double the response to ensure there are no missing curly braces or brackets and quotes. It is important that I receive a well formatted JSON response. Make sure there are no Bad control character in string literal in JSON.
 `
 

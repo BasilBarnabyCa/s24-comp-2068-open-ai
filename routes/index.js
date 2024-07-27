@@ -33,6 +33,7 @@ router.post("/process-data", fileService.uploadMiddleware, async (req, res, next
 		await dbService.saveSuggestion(jsonData);
 
 		const formattedData = {
+			title: suggestions.title,
 			summary: suggestions.summary,
 			careerPath: suggestions.careerPath.map(item => ({
 				role: item.role,

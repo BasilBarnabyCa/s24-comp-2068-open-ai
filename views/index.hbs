@@ -28,7 +28,6 @@
 						accept=".pdf, .docx">
 					<button class="btn btn-sm btn-secondary" type="submit">Send</button>
 				</form>
-				<h2>Results</h2>
 				<div id="results"></div>
 			</div>
 		</div>
@@ -63,59 +62,64 @@
 		axios.post('/process-data', formData)
 			.then(response => {
 				const formattedData = response.data.formattedData;
-				const resultsContainer = document.getElementById('results');
-
-				resultsContainer.innerHTML = `
-					<h4>Summary</h4>
-					<p>${formattedData.summary}</p>
-					<h4 class="mt-5">Industry Trends</h4>
-					<p>${formattedData.industryTrends}</p>
-					<h4 class="mt-5">Career Path</h4>
-					<ul>
-					${formattedData.careerPath.map(item => `
-						<li>
-						<strong>${item.role} (${item.percentageMatch}%)</strong>
-						<p>${item.overview}</p>
-						</li>
-					`).join('')}
-					</ul>
-					<h4 class="mt-5">Salary Expectations</h4>
-					<p>
-						${Object.entries(formattedData.salaryExpectations).map(([role, salaryRange]) => `
-						<strong>${role}:</strong> ${salaryRange}
-						`).join('<br>')}
-					</p>
-					<h4 class="mt-5">Strong Skills</h4>
-					 ${formattedData.strongSkills.map((category, index) => `
-						<div>
-						<strong>${category.category}:</strong>
-						<p>${category.summary}</p>
-						<ul>
-							${category.skills.map(skill => `<li>${skill}</li>`).join('')}
-						</ul>
-						</div>
-					`).join('')}
-					<h4 class="mt-5">Suggested Learning</h4>
-					<ul>${formattedData.suggestedLearning.map(item => `
-					<li>
-						<strong>${item.skill}</strong>
-						<p>${item.explanation}</p>
-					</li>
-					`).join('')}</ul>
-					<h4 class="mt-5">Suggested Certifications</h4>
-					<ul>${formattedData.suggestedCertifications.map(cert => `
-					<li>
-						<strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>RR
-						<p>${cert.description}</p>
-					</li>
-					`).join('')}</ul>
-				`;
+				updateResultsContainer(formattedData);
+				loadSuggestions();
 			})
 			.catch(error => {
 				console.error('Error:', error);
 				document.getElementById('results').innerHTML = '<p>An error occurred. Please try again.</p>';
 			});
 	});
+
+	function updateResultsContainer(formattedData) {
+		const resultsContainer = document.getElementById('results');
+		resultsContainer.innerHTML = `
+		<h2>${formattedData.title}</h2>
+		<h4 class="mt-3">Summary</h4>
+		<p>${formattedData.summary}</p>
+		<h4 class="mt-5">Industry Trends</h4>
+		<p>${formattedData.industryTrends}</p>
+		<h4 class="mt-5">Career Path</h4>
+		<ul>
+		${formattedData.careerPath.map(item => `
+			<li>
+			<strong>${item.role} (${item.percentageMatch}%)</strong>
+			<p>${item.overview}</p>
+			</li>
+		`).join('')}
+		</ul>
+		<h4 class="mt-5">Salary Expectations</h4>
+		<p>
+			${Object.entries(formattedData.salaryExpectations).map(([role, salaryRange]) => `
+			<strong>${role}:</strong> ${salaryRange}
+			`).join('<br>')}
+		</p>
+		<h4 class="mt-5">Strong Skills</h4>
+		 ${formattedData.strongSkills.map((category, index) => `
+			<div>
+			<strong>${category.category}:</strong>
+			<p>${category.summary}</p>
+			<ul>
+				${category.skills.map(skill => `<li>${skill}</li>`).join('')}
+			</ul>
+			</div>
+		`).join('')}
+		<h4 class="mt-5">Suggested Learning</h4>
+		<ul>${formattedData.suggestedLearning.map(item => `
+		<li>
+			<strong>${item.skill}</strong>
+			<p>${item.explanation}</p>
+		</li>
+		`).join('')}</ul>
+		<h4 class="mt-5">Suggested Certifications</h4>
+		<ul>${formattedData.suggestedCertifications.map(cert => `
+		<li>
+			<strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>
+			<p>${cert.description}</p>
+		</li>
+		`).join('')}</ul>
+	`;
+	}
 
 	// Load suggestions
 	function loadSuggestions() {
@@ -154,53 +158,7 @@
 		axios.get(`/suggestions/${suggestionId}`)
 			.then(response => {
 				const formattedData = response.data.formattedData;
-				const resultsContainer = document.getElementById('results');
-
-				resultsContainer.innerHTML = `
-                <h4>Summary</h4>
-                <p>${formattedData.summary}</p>
-                <h4 class="mt-5">Industry Trends</h4>
-                <p>${formattedData.industryTrends}</p>
-                <h4 class="mt-5">Career Path</h4>
-                <ul>
-                ${formattedData.careerPath.map(item => `
-                    <li>
-                    <strong>${item.role} (${item.percentageMatch}%)</strong>
-                    <p>${item.overview}</p>
-                    </li>
-                `).join('')}
-                </ul>
-                <h4 class="mt-5">Salary Expectations</h4>
-                <p>
-                    ${Object.entries(formattedData.salaryExpectations).map(([role, salaryRange]) => `
-                    <strong>${role}:</strong> ${salaryRange}
-                    `).join('<br>')}
-                </p>
-                <h4 class="mt-5">Strong Skills</h4>
-                 ${formattedData.strongSkills.map((category, index) => `
-                    <div>
-                    <strong>${category.category}:</strong>
-                    <p>${category.summary}</p>
-                    <ul>
-                        ${category.skills.map(skill => `<li>${skill}</li>`).join('')}
-                    </ul>
-                    </div>
-                `).join('')}
-                <h4 class="mt-5">Suggested Learning</h4>
-                <ul>${formattedData.suggestedLearning.map(item => `
-                <li>
-                    <strong>${item.skill}</strong>
-                    <p>${item.explanation}</p>
-                </li>
-                `).join('')}</ul>
-                <h4 class="mt-5">Suggested Certifications</h4>
-                <ul>${formattedData.suggestedCertifications.map(cert => `
-                <li>
-                    <strong>${cert.name}</strong>: <a href="${cert.link}" target="_blank">${cert.link}</a>
-                    <p>${cert.description}</p>
-                </li>
-                `).join('')}</ul>
-            `;
+				updateResultsContainer(formattedData);
 			})
 			.catch(error => {
 				console.error('Error fetching suggestion details:', error);
