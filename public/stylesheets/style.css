@@ -19,6 +19,10 @@ h6 {
   font-weight: 500;
 }
 
+h4 {
+	color: #10b981;
+}
+
 .full-height {
   min-height: 100vh;
 }
@@ -54,4 +58,9 @@ h6 {
 
 footer {
   font-size: 0.8rem;
+}
+
+.upload-icon {
+	width: 75px;
+	height: auto;
 }
