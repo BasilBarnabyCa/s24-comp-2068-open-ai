@@ -1,0 +1,121 @@
+<div class="container mt-5">
+  <h1>{{title}}</h1>
+
+  <h2>Abstract</h2>
+  <p>CareerCraft is an innovative web application designed to guide users toward suitable career paths based on the analysis of their uploaded resumes. Leveraging the power of NodeJS, Express, MongoDB, and OpenAI's advanced natural language processing capabilities, CareerCraft offers personalized career advice, enhancing the job-seeking experience by providing tailored career path recommendations.</p>
+
+  <h2>Introduction</h2>
+  <p>In today's competitive job market, finding the right career path can be a daunting task. CareerCraft aims to simplify this process by utilizing state-of-the-art AI technology to analyze resumes and suggest optimal career paths for users. By integrating OpenAI's API, the application provides insightful and personalized career guidance, helping users make informed decisions about their professional futures.</p>
+
+  <h2>Objectives</h2>
+  <ul>
+    <li>Analyze User Resumes: Utilize AI to analyze the content of user-uploaded resumes.</li>
+    <li>Provide Career Recommendations: Offer personalized career path suggestions based on resume analysis.</li>
+    <li>Maintain User Interaction History: Store and manage user interaction data using MongoDB.</li>
+    <li>Enhance User Experience: Ensure a seamless and user-friendly interface for uploading resumes and receiving career guidance.</li>
+  </ul>
+
+  <h2>Technologies Used</h2>
+  <ul>
+    <li>NodeJS: A JavaScript runtime for building server-side applications.</li>
+    <li>Express: A minimal and flexible Node.js web application framework.</li>
+    <li>MongoDB: A NoSQL database for storing user interaction history.</li>
+    <li>OpenAI API: A service for generating AI-based responses and analyzing resume content.</li>
+  </ul>
+
+  <h2>System Requirements</h2>
+  <ul>
+    <li>Operating System: Windows, macOS, or Linux</li>
+    <li>NodeJS: Version 14.x or higher</li>
+    <li>NPM (Node Package Manager): Version 6.x or higher</li>
+    <li>MongoDB: Version 4.x or higher</li>
+    <li>OpenAI API Key</li>
+  </ul>
+
+  <h2>Project Setup</h2>
+  <h3>Prerequisites</h3>
+  <p>Before setting up the project, ensure you have the following:</p>
+  <ul>
+    <li>NodeJS and NPM installed</li>
+    <li>MongoDB installed and running</li>
+    <li>OpenAI API key</li>
+  </ul>
+
+  <h3>Installation Steps</h3>
+  <ol>
+    <li>Clone the repository:
+      <pre><code>git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git
+cd career-craft</code></pre>
+    </li>
+    <li>Install dependencies:
+      <pre><code>npm install</code></pre>
+    </li>
+    <li>Configure environment variables:
+      <ul>
+        <li>Create a <code>.env</code> file in the root directory</li>
+        <li>Add your OpenAI API key and MongoDB connection string</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>Environment Configuration</h2>
+  <p>Creating a <code>.env</code> file in the root directory and adding the necessary environment variables is crucial for the proper functioning of the CareerCraft application.</p>
+  <p>An <code>.env.example</code> file is provided in the root of this project to guide users on the necessary requirements for the application. To create a <code>.env</code> file from the example file, use the terminal in the project directory and run the following command:</p>
+  <pre><code>cp .env.example .env</code></pre>
+  <p>Open the <code>.env</code> file and insert the required keys for the project, such as your OpenAI API key and MongoDB connection string.</p>
+  <pre><code>OPENAI_API_KEY=your_openai_api_key
+CONNECTION_STRING_MONGODB=you_monogodb_connection_string_here</code></pre>
+
+  <h2>API Integration</h2>
+  <h3>OpenAI API Integration</h3>
+  <p>Integrate OpenAI's API to analyze the content of uploaded resumes and generate career path recommendations. Ensure proper configuration and handling of API requests to maintain performance and reliability. The following steps are required to ensure OpenAI’s API integration is successfully implemented:</p>
+  <ol>
+    <li>Sign in to your OpenAI account:
+      <ul>
+        <li>Visit <a href="https://platform.openai.com">OpenAI Platform</a></li>
+      </ul>
+    </li>
+    <li>Steps for generating your API key:
+      <ul>
+        <li>Click on your profile icon.</li>
+        <li>Select the option <strong>Your Profile</strong>.</li>
+        <li>Under <strong>User API Keys</strong>, create a new secret key.</li>
+      </ul>
+    </li>
+  </ol>
+  <p><strong>Note:</strong> Although OpenAI provides some free tokens, they may not be sufficient to achieve the desired results for this project. It is highly recommended to fund your account for a better experience.</p>
+
+  <h2>Database Management</h2>
+  <h3>MongoDB Setup</h3>
+  <p>Configure MongoDB to store user interaction data, including uploaded resumes and generated career path suggestions. This enables the application to maintain a history of user interactions and provide better insights over time.</p>
+
+  <h2>Resume Upload Handling</h2>
+  <p>Implement functionality to handle resume file uploads securely and efficiently. Use Multer middleware for managing file uploads and ensure that uploaded files are stored in the designated directory.</p>
+
+  <h2>Career Path Analysis</h2>
+  <p>Develop the core functionality to analyze uploaded resumes using OpenAI's API. Process the resume content, send it to OpenAI for analysis, and interpret the results to suggest suitable career paths.</p>
+  <ol>
+    <li><strong>Preparation of the Directive:</strong> A detailed directive is created, instructing the AI on how to analyze the resume. The directive includes specific instructions on generating a structured JSON response covering various aspects such as summary, career path, strong skills, suggested learning, suggested certifications, industry trends, and salary expectations.</li>
+    <li><strong>Integration with OpenAI's API:</strong> The application uses the OpenAI API to process the resume content. This involves sending a POST request to the OpenAI endpoint with the prepared directive and the resume text.</li>
+    <li><strong>Sending the Request:</strong> The POST request includes the model specification, messages, token limit, and headers for authorization and content type.</li>
+    <li><strong>Receiving the Response:</strong> The OpenAI API processes the request and returns a response containing the AI-generated suggestions in JSON format.</li>
+    <li><strong>Parsing the Response:</strong> The application parses the JSON response to extract the relevant information, ensuring it is well-formatted and free of errors.</li>
+    <li><strong>Providing Career Suggestions:</strong> The parsed response is used to provide the user with career path suggestions, including a summary, career path overview, strong skills, suggested learning, suggested certifications, industry trends, and salary expectations.</li>
+  </ol>
+
+  <h2>Error Handling</h2>
+  <p>Implement robust error handling to manage unexpected issues gracefully. Ensure that errors are logged and that users receive appropriate feedback in case of problems during file upload, API interaction, or other operations.</p>
+
+  <h2>Testing and Validation</h2>
+  <p>Conduct thorough testing to validate the functionality of the application. Perform unit tests, integration tests, and user acceptance tests to ensure the application meets all requirements and provides a seamless user experience.</p>
+
+  <h2>Conclusion</h2>
+  <p>CareerCraft leverages modern web technologies and AI capabilities to offer personalized career guidance. By analyzing user resumes and providing tailored career path suggestions, CareerCraft aims to simplify the job-seeking process and help users make informed career decisions.</p>
+
+  <h2>References</h2>
+  <ul>
+    <li>MongoDB Documentation: <a href="https://www.mongodb.com/docs/">https://www.mongodb.com/docs/</a></li>
+    <li>OpenAI Documentation: <a href="https://platform.openai.com/docs/quickstart?context=node">https://platform.openai.com/docs/quickstart?context=node</a></li>
+    <li>Express Documentation: <a href="https://expressjs.com/">https://expressjs.com/</a></li>
+  </ul>
+</div>
