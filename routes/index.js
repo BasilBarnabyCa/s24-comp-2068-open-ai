@@ -93,4 +93,8 @@ router.delete("/suggestions/:id", async (req, res, next) => {
     }
 });
 
+router.get("/documentation", function (req, res, next) {
+	res.render("documentation", { title: `${appName} | Documentation` });
+});
+
 module.exports = router;
