@@ -1,12 +1,13 @@
 
-# Open AI Group Documentation
+# CarrerCraft - Open AI Group Documentation
 
 This repository contains the documentation for the Open AI Group project developed as part of the COMP2068-JavaScript Frameworks course at Georgian College.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Demo Link](#group-members)
 - [Group Members](#group-members)
+- [Introduction](#introduction)
 - [Abstract](#abstract)
 - [Objectives](#objectives)
 - [Technologies Used](#technologies-used)
@@ -26,6 +27,9 @@ This repository contains the documentation for the Open AI Group project develop
 - [Conclusion](#conclusion)
 - [References](#references)
 - [Useful VS Code Extensions](#useful-vs-code-extensions)
+
+## Demo Link
+You can view demo [here](https://careercraft-web-app.azurewebsites.net/).
 
 ## Group Members
 - Basil Barnaby – 200540109
@@ -87,14 +91,23 @@ Before setting up the project, ensure you have the following:
 - OpenAI API key
 
 ### Installation Steps
-1. Clone the repository: `git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git`
-2. Install dependencies: `npm install`
+1. Clone the repository: 
+```bash
+git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git
+```		
+2. Install dependencies: 
+```bash
+npm install
+```		
 3. Configure environment variables:
     - Create a `.env` file in the root directory
     - Add your OpenAI API key and MongoDB connection string
 
 ### Environment Configuration
-Creating a `.env` file in the root directory and adding the necessary environment variables is crucial for the proper functioning of the CareerCraft application. An `.env.example` file is provided at the root of this project to guide users on the requirements for the application. To create a `.env` file from the example file, use the terminal in the project directory and run the following command: `cp .env.example .env`
+Creating a `.env` file in the root directory and adding the necessary environment variables is crucial for the proper functioning of the CareerCraft application. An `.env.example` file is provided at the root of this project to guide users on the requirements for the application. To create a `.env` file from the example file, use the terminal in the project directory and run the following command:		
+```bash
+cp .env.example .env
+```
 
 ### API Integration
 #### OpenAI API
@@ -127,10 +140,10 @@ Steps to Create a MongoDB Account and Implement it in VS Code:
     - Enter a database name (e.g., careerCraftDB) and a collection name (e.g., userInteractions).
 5. Get the Connection String:
     - Click on "Connect" in your cluster view.
-    - Select "Connect your application" and copy the connection string. It will look something like this:
-      ```
+    - Select "Connect your application" and copy the connection string. It will look something like this:		
+      ```bash
       mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
-      ```
+      ```		
     - Replace `<username>`, `<password>`, and `<dbname>` with your MongoDB username, password, and database name respectively.
 6. Install MongoDB Extension for VS Code:
     - Open Visual Studio Code.
@@ -142,15 +155,15 @@ Steps to Create a MongoDB Account and Implement it in VS Code:
     - Enter the required credentials if prompted.
 8. Integrate MongoDB with Your Node.js Application:
     - Ensure you have Mongoose installed in your project: `npm install mongoose`
-    - Create a new file `config/globals.js` to store your MongoDB connection string:
+    - Create a new file `config/globals.js` to store your MongoDB connection string:		
       ```javascript
       module.exports = {
          ConnectionStrings: {
             MongoDB: 'your_mongodb_connection_string_here'
          }
       };
-      ```
-    - Update your `app.js` to include the MongoDB connection:
+      ```		
+    - Update your `app.js` to include the MongoDB connection:		
       ```javascript
       const mongoose = require('mongoose');
       const config = require('./config/globals');
@@ -160,7 +173,7 @@ Steps to Create a MongoDB Account and Implement it in VS Code:
       })
       .then(() => console.log('MongoDB connected successfully'))
       .catch(err => console.error('MongoDB connection error:', err));
-      ```
+      ```		
 
 ## Career Path Analysis
 Developing the core functionality to analyze uploaded resumes using OpenAI's API involves several key steps. Below is an explanation of how the Career Path Analysis is generated:
@@ -250,13 +263,6 @@ CareerCraft's results are designed to be easy to understand. Here’s a breakdow
 - Suggested Certifications: Relevant industry certifications and courses with links.
 - Industry Trends: Descriptions of current trends in the industry.
 - Salary Expectations: Salary ranges for the suggested roles.
-
-## Contacting Support
-If you encounter any issues or have questions about using CareerCraft, our team members are here to help. Please reach out to one of our group members:
-- Basil Barnaby – 200540109
-- Merik De Vree – 200462061
-- Nicolas Millan – 200533728
-- Michael Anthony - 200558549
 
 
 
