@@ -218,3 +218,30 @@ ol > li {
 	/* color: #10b981; */
 	text-decoration: underline;
 }
+
+.contributor-card {
+	height: 400px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.contributor-card:hover {
+	background-color: #21262c;
+}
+
+.contributor-card h4 {
+	width: 100%;
+	color: #fff !important;
+}
+
+.contact-links {
+	width: 100%;
+}
+
+.contact-link {
+    height: 40px;
+    width: 40px;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	margin-top: 1em;
+}
