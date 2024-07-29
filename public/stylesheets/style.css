@@ -145,13 +145,29 @@ textarea::placeholder {
     padding-top: 3em !important;
 }
 
+.contributor-card {
+	height: 400px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.contributor-card:hover {
+	background-color: #21262c;
+}
+
+.contributor-card h4 {
+	width: 100%;
+	color: #fff !important;
+}
+
 .contact-links {
-    display: flex;
-    flex-direction: row;
+	width: 100%;
 }
 
 .contact-link {
-    height: 50px;
-    width: 50px;
-    margin-right: 1em;
+    height: 40px;
+    width: 40px;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	margin-top: 1em;
 }
