@@ -1,5 +1,4 @@
-
-# CarrerCraft - Open AI Group Documentation
+# CareerCraft - Open AI Group Documentation
 
 This repository contains the documentation for the Open AI Group project developed as part of the COMP2068-JavaScript Frameworks course at Georgian College.
 
@@ -29,7 +28,7 @@ This repository contains the documentation for the Open AI Group project develop
 - [Useful VS Code Extensions](#useful-vs-code-extensions)
 
 ## Demo Link
-You can view demo [here](https://careercraft-web-app.azurewebsites.net/){:target="_blank"}.
+You can view demo <a href="https://careercraft-web-app.azurewebsites.net/" target="_blank">here</a>.
 
 ## Group Members
 - Basil Barnaby – 200540109
@@ -55,7 +54,6 @@ In today's competitive job market, finding the right career path can be a daunti
 - MongoDB: A NoSQL database for storing user interaction history.
 - OpenAI API: A service for generating AI-based responses and analyzing resume content.
 
-
 ## Packages Used
 
 Here is a list of all the packages used in this project as specified in the `package.json` file:
@@ -68,7 +66,6 @@ Here is a list of all the packages used in this project as specified in the `pac
 - **Multer:** Node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files.
 - **OpenAI:** A client library for accessing the OpenAI API from Node.js.
 - **PDF-Parse:** A PDF parsing library for Node.js.
-
 
 ## System Requirements
 - Operating System: Windows, macOS, or Linux
@@ -86,28 +83,28 @@ Before setting up the project, ensure you have the following:
 
 ### Installation Steps
 1. Clone the repository: 
-```bash
-git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git
-```		
+    ```bash
+    git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git
+    ```		
 2. Install dependencies: 
-```bash
-npm install
-```		
+    ```bash
+    npm install
+    ```		
 3. Configure environment variables:
     - Create a `.env` file in the root directory
     - Add your OpenAI API key and MongoDB connection string
 
 ### Environment Configuration
 Creating a `.env` file in the root directory and adding the necessary environment variables is crucial for the proper functioning of the CareerCraft application. An `.env.example` file is provided at the root of this project to guide users on the requirements for the application. To create a `.env` file from the example file, use the terminal in the project directory and run the following command:		
-```bash
-cp .env.example .env
-```
+    ```bash
+    cp .env.example .env
+    ```
 
 ### API Integration
 #### OpenAI API
 Integrate OpenAI's API to analyze the content of uploaded resumes and generate career path recommendations. Ensure proper configuration and handling of API requests to maintain performance and reliability. The following steps are required to ensure OpenAI’s API integration is successfully implemented:
 1. Sign in to your OpenAI account:
-    - Visit [OpenAI Platform](https://platform.openai.com/){:target="_blank"}
+    - Visit <a href="https://platform.openai.com/" target="_blank">OpenAI Platform</a>
 2. Steps for generating your API key:
     - Click on your profile icon.
     - Select the option [Your Profile].
@@ -119,7 +116,7 @@ Integrate OpenAI's API to analyze the content of uploaded resumes and generate c
 Configure MongoDB to store user interaction data, including uploaded resumes and generated career path suggestions. This enables the application to maintain a history of user interactions and provide better insights over time.
 Steps to Create a MongoDB Account and Implement it in VS Code:
 1. Create a MongoDB Account:
-    - Visit the [MongoDB website](https://www.mongodb.com/){:target="_blank"}.
+    - Visit the <a href="https://www.mongodb.com/" target="_blank">MongoDB website</a>.
     - Click the "Sign In" button at the top right corner and select "Create an Account."
     - Fill in the required details and complete the registration process.
 2. Create a New Project:
@@ -205,30 +202,26 @@ Conduct thorough testing to validate the functionality of the application. Perfo
 CareerCraft leverages modern web technologies and AI capabilities to offer personalized career guidance. By analyzing user resumes and providing tailored career path suggestions, CareerCraft aims to simplify the job-seeking process and help users make informed career decisions.
 
 ## References
-- [MongoDB Documentation](https://www.mongodb.com/docs/){:target="_blank"}
-- [OpenAI Documentation](https://platform.openai.com/docs/quickstart?context=node){:target="_blank"}
-- [Express Documentation](https://expressjs.com/){:target="_blank"}
-
+- <a href="https://www.mongodb.com/docs/" target="_blank">MongoDB Documentation</a>
+- <a href="https://platform.openai.com/docs/quickstart?context=node" target="_blank">OpenAI Documentation</a>
+- <a href="https://expressjs.com/" target="_blank">Express Documentation</a>
 
 ## Useful VS Code Extensions
 
 Here are some useful VS Code extensions to enhance your development experience:
 
-- **[MongoDB for VS Code](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode){:target="_blank"}:** MongoDB for VS Code
-- **[Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode){:target="_blank"}:** Prettier - Code formatter
-
-
+- **<a href="https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode" target="_blank">MongoDB for VS Code</a>**: MongoDB for VS Code
+- **<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank">Prettier - Code formatter</a>**: Prettier - Code formatter
 
 # CareerCraft User Guide
 
 Welcome to CareerCraft! This guide will help you navigate and use CareerCraft to discover the best career paths suited for you based on your resume. Follow these simple steps to get started.
 
-
 ## Introduction
 CareerCraft is an easy-to-use web application designed to help you find the best career path based on the content of your resume. By leveraging advanced AI technology, CareerCraft provides personalized career advice and recommendations.
 
 ## Accessing CareerCraft
-To access CareerCraft, open your web browser and go to the [CareerCraft website](https://careercraft-web-app.azurewebsites.net){:target="_blank"}.
+To access CareerCraft, open your web browser and go to the <a href="https://careercraft-web-app.azurewebsites.net" target="_blank">CareerCraft website</a>.
 
 ## Uploading Your Resume
 Once you are on the CareerCraft homepage, follow these steps to upload your resume:
@@ -254,6 +247,3 @@ CareerCraft's results are designed to be easy to understand. Here’s a breakdow
 - Suggested Certifications: Relevant industry certifications and courses with links.
 - Industry Trends: Descriptions of current trends in the industry.
 - Salary Expectations: Salary ranges for the suggested roles.
-
-
-
