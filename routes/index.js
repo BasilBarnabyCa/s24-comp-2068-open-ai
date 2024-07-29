@@ -97,4 +97,8 @@ router.get("/documentation", function (req, res, next) {
 	res.render("documentation", { title: `${appName} | Documentation` });
 });
 
+router.get("/user-guide", function (req, res, next) {
+	res.render("user-guide", { title: `${appName} | User Guide` });
+});
+
 module.exports = router;
