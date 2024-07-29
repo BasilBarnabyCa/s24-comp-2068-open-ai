@@ -29,7 +29,7 @@ This repository contains the documentation for the Open AI Group project develop
 - [Useful VS Code Extensions](#useful-vs-code-extensions)
 
 ## Demo Link
-You can view demo [here](https://careercraft-web-app.azurewebsites.net/).
+You can view demo [here](https://careercraft-web-app.azurewebsites.net/){:target="_blank"}.
 
 ## Group Members
 - Basil Barnaby – 200540109
@@ -61,16 +61,10 @@ In today's competitive job market, finding the right career path can be a daunti
 Here is a list of all the packages used in this project as specified in the `package.json` file:
 
 - **Axios:** A promise-based HTTP client for the browser and Node.js.
-- **Cookie-Parser:** Parse HTTP request cookies.
 - **CORS (Cross-Origin Resource Sharing):** A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
-- **Debug:** A tiny debugging utility modeled after Node.js core's debugging technique.
 - **Dotenv:** Loads environment variables from a `.env` file into `process.env`.
-- **Express:** Fast, unopinionated, minimalist web framework for Node.js.
-- **HBS (Express Handlebars):** Handlebars view engine for Express.
-- **HTTP-Errors:** Create HTTP errors for Express, Koa, Connect, etc. with ease.
 - **Mammoth:** Converts `.docx` documents into HTML or plain text.
 - **Mongoose:** MongoDB object modeling tool designed to work in an asynchronous environment.
-- **Morgan:** HTTP request logger middleware for Node.js.
 - **Multer:** Node.js middleware for handling `multipart/form-data`, which is primarily used for uploading files.
 - **OpenAI:** A client library for accessing the OpenAI API from Node.js.
 - **PDF-Parse:** A PDF parsing library for Node.js.
@@ -113,7 +107,7 @@ cp .env.example .env
 #### OpenAI API
 Integrate OpenAI's API to analyze the content of uploaded resumes and generate career path recommendations. Ensure proper configuration and handling of API requests to maintain performance and reliability. The following steps are required to ensure OpenAI’s API integration is successfully implemented:
 1. Sign in to your OpenAI account:
-    - Visit [OpenAI Platform](https://platform.openai.com/)
+    - Visit [OpenAI Platform](https://platform.openai.com/){:target="_blank"}
 2. Steps for generating your API key:
     - Click on your profile icon.
     - Select the option [Your Profile].
@@ -125,7 +119,7 @@ Integrate OpenAI's API to analyze the content of uploaded resumes and generate c
 Configure MongoDB to store user interaction data, including uploaded resumes and generated career path suggestions. This enables the application to maintain a history of user interactions and provide better insights over time.
 Steps to Create a MongoDB Account and Implement it in VS Code:
 1. Create a MongoDB Account:
-    - Visit the [MongoDB website](https://www.mongodb.com/).
+    - Visit the [MongoDB website](https://www.mongodb.com/){:target="_blank"}.
     - Click the "Sign In" button at the top right corner and select "Create an Account."
     - Fill in the required details and complete the registration process.
 2. Create a New Project:
@@ -211,20 +205,17 @@ Conduct thorough testing to validate the functionality of the application. Perfo
 CareerCraft leverages modern web technologies and AI capabilities to offer personalized career guidance. By analyzing user resumes and providing tailored career path suggestions, CareerCraft aims to simplify the job-seeking process and help users make informed career decisions.
 
 ## References
-- [MongoDB Documentation](https://www.mongodb.com/docs/)
-- [OpenAI Documentation](https://platform.openai.com/docs/quickstart?context=node)
-- [Express Documentation](https://expressjs.com/)
+- [MongoDB Documentation](https://www.mongodb.com/docs/){:target="_blank"}
+- [OpenAI Documentation](https://platform.openai.com/docs/quickstart?context=node){:target="_blank"}
+- [Express Documentation](https://expressjs.com/){:target="_blank"}
 
 
 ## Useful VS Code Extensions
 
 Here are some useful VS Code extensions to enhance your development experience:
 
-- **[MongoDB for VS Code](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode):** MongoDB for VS Code
-- **[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint):** ESLint
-- **[Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode):** Prettier
-- **[Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome):** Debugger for Chrome
-- **[REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client):** REST Client
+- **[MongoDB for VS Code](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode){:target="_blank"}:** MongoDB for VS Code
+- **[Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode){:target="_blank"}:** Prettier - Code formatter
 
 
 
@@ -237,7 +228,7 @@ Welcome to CareerCraft! This guide will help you navigate and use CareerCraft to
 CareerCraft is an easy-to-use web application designed to help you find the best career path based on the content of your resume. By leveraging advanced AI technology, CareerCraft provides personalized career advice and recommendations.
 
 ## Accessing CareerCraft
-To access CareerCraft, open your web browser and go to the [CareerCraft website](https://careercraft-web-app.azurewebsites.net).
+To access CareerCraft, open your web browser and go to the [CareerCraft website](https://careercraft-web-app.azurewebsites.net){:target="_blank"}.
 
 ## Uploading Your Resume
 Once you are on the CareerCraft homepage, follow these steps to upload your resume:
