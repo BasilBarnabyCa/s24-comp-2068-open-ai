@@ -253,23 +253,28 @@
 					provide better insights over time.</p>
 
 				<ol>
-					<li>Create a MongoDB Account:
-						<ul>
-							<li><a class="page-link" href="https://www.mongodb.com">MongoDB website</a></li>
-							<li>Click the <strong>Sign In</strong> button at the top right corner and select
-								<strong>Create an Account</strong>.</li>
-							<li>Fill in the required details and complete the registration process.</li>
-						</ul>
-					</li>
-					<li>Create a New Project:
-						<ul>
-							<li>Once logged in, click on <strong>New Project</strong>.</li>
-							<li>Enter a name for your project and click <strong>Next</strong>.</li>
-						</ul>
-					</li>
 					<li>Create a Cluster:
 						<ul>
-							<li>In your new project, click on <strong>Build a Cluster</strong>.</li>
+							<li><a class="page-link" href="https://www.mongodb.com">MongoDB website</a></li>
+							<li>On the Overview page click the <strong>Create</strong> if you want to create a new cluster.</li>
+							<li>Select a tier.</li>
+							<li>Select a cluster name, provider and region of your choice.</li>
+							<li>Click <strong>Create Deployment</strong></li>
+						</ul>
+					</li>
+					<li>Create a Database User:
+						<ul>
+							<li>In the sidebar, click on <strong>Database Access</strong>.</li>
+							<li>Click on <strong>Add New Database User</strong>.</li>
+							<li>Select <strong>Password</strong> as the <strong>Authentication Method</strong>.</li>
+							<li>Enter a user name and click <strong>Autogenerate Password</strong>.</li>
+							<li>Under <strong>Built-in Role </strong>, select <strong>Atlas admin</strong>.</li>
+							<li>Click <strong>Add User</strong>.</li>
+						</ul>
+					</li>
+					<li>Update Network Access
+						<ul>
+							<li>In the sidebar, click on <strong>Database</strong>.</li>
 							<li>Select the <strong>Shared</strong> option for the free tier and choose your preferred
 								cloud provider and region.</li>
 							<li>Click <strong>Create Cluster</strong>.</li>
@@ -277,10 +282,15 @@
 					</li>
 					<li>Configure the Cluster:
 						<ul>
-							<li>After the cluster is created, click on <strong>Collections</strong> and then on
-								<strong>Add My Own Data</strong>.</li>
-							<li>Enter a database name (e.g., careerCraftDB) and a collection name (e.g.,
-								userInteractions).</li>
+							<li>Click on <strong>Connect</strong>.</li>
+							<li>Select <strong>MongoDB for VS Code</strong>.</li>
+							<li>Copy your connection string and paste in the `.env` file in your project.</li>
+							<li>It will look something like this:</li>
+							<div class="card code-card mt-3 mb-3">
+								<div class="card-body">
+									<code>mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority</code>
+								</div>
+							</div>
 						</ul>
 					</li>
 					<li>Get the Connection String:
@@ -290,12 +300,10 @@
 								look something like this:</li>
 							<div class="card code-card mt-3 mb-3">
 								<div class="card-body">
-									<code>mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority</code>
+									<code>mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbName></code>
 								</div>
 							</div>
-							<li>Replace <code>&lt;username&gt;</code>, <code>&lt;password&gt;</code>, and
-								<code>&lt;dbname&gt;</code> with your MongoDB username, password, and database name
-								respectively.</li>
+							<li>Replace `<username>`, `<password>`, and `<dbName>` with your MongoDB username, password, and database name respectively.</li>
 						</ul>
 					</li>
 					<li>Install MongoDB Extension for VS Code:
@@ -312,50 +320,9 @@
 									Connect</strong>.</li>
 							<li>Select <strong>Add Connection String</strong> and paste the connection string you copied
 								earlier.</li>
-							<li>Enter the required credentials if prompted.</li>
-						</ul>
-					</li>
-					<li>Integrate MongoDB with Your Node.js Application:
-						<ul>
-							<li>Ensure you have Mongoose installed in your project:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>npm install mongoose</code>
-								</div>
-							</div>
-							<li>Create a new file <code>config/globals.js</code> to store your MongoDB connection
-								string:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>
-										module.exports = {<br>
-										&nbsp;&nbsp;ConnectionStrings: {<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;MongoDB: 'your_mongodb_connection_string_here'<br>
-										&nbsp;&nbsp;}<br>
-										};<br>
-                    				</code>
-								</div>
-							</div>
-							<li>Update your <code>app.js</code> to include the MongoDB connection:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>
-										const mongoose = require('mongoose');<br>
-										const config = require('./config/globals');<br><br>
-
-										mongoose.connect(config.ConnectionStrings.MongoDB, {<br>
-										&nbsp;&nbsp;useNewUrlParser: true,<br>
-										&nbsp;&nbsp;useUnifiedTopology: true<br>
-										})<br>
-										.then(() => console.log('MongoDB connected successfully'))<br>
-										.catch(err => console.error('MongoDB connection error:', err));<br>
-									</code>
-								</div>
-							</div>
 						</ul>
 					</li>
 				</ol>
-
 
 
 				<h4 id="resume-upload-handling" class="mt-5">Resume Upload Handling</h4>

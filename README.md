@@ -49,21 +49,23 @@ Before setting up the project, ensure you have the following:
 - OpenAI API key
 
 ### Installation Steps
-1. Clone the repository: 
+1. Clone the repository:		
     ```bash
 	cd path/to/where/you/want/to/save/project/folder
+    ```		
+    ```bash
     git clone https://github.com/BasilBarnabyCa/s24-comp-2068-open-ai.git
 	cd s24-comp-2068-open-ai
     ```		
-2. Install dependencies: 
+2. Install dependencies:		
     ```bash
     npm install
     ```		
 3. Configure environment variables:
-    - Create a `.env` file in the root directory
+    - Create a `.env` file in the root directory		
 	```bash
     cp .env.example .env
-    ```
+    ```		
     - Add your OpenAI API key and MongoDB connection string
 
 ### API Integration
@@ -74,32 +76,40 @@ Before setting up the project, ensure you have the following:
     - Click on your profile icon.
     - Select the option [Your Profile].
     - Under User API Keys, click View Project API keys, create a new secret key.
-    > Note: Although OpenAI provides some free tokens, they may not be sufficient to achieve the desired results for this project. It is highly recommended to fund your account for a better experience.
+	- Copy secret key to the `.env` file.
+	- NB once you close the secret window, you will not have access to copying the ke again.
 
 ### Database Management
 #### MongoDB Setup
 Steps to Create a MongoDB Account and Implement it in VS Code:
-1. Create a MongoDB Account:
-    - Visit the <a href="https://www.mongodb.com/" target="_blank">MongoDB website</a>.
-    - Click the "Sign In" button at the top right corner and select "Create an Account."
-    - Fill in the required details and complete the registration process.
-2. Create a New Project:
-    - Once logged in, click on "New Project."
-    - Enter a name for your project and click "Next."
-3. Create a Cluster:
-    - In your new project, click on "Build a Cluster."
-    - Select the "Shared" option for the free tier and choose your preferred cloud provider and region.
-    - Click "Create Cluster."
-4. Configure the Cluster:
-    - After the cluster is created, click on "Collections" and then on "Add My Own Data."
-    - Enter a database name (e.g., careerCraftDB) and a collection name (e.g., userInteractions).
+1. Create a Cluster:
+    - Visit the <a href="https://www.mongodb.com/" target="_blank">MongoDB website</a> and sign in.
+    - On the Overview page click the <strong>Create</strong> if you want to create a new cluster.
+	- Select a tier.
+	- Select a cluster name, provider and region of your choice.
+	- Click <strong>Create Deployment</strong>
+3. Create a Database User:
+    - In the sidebar, click on <strong>Database Access</strong>.
+    - Click on <strong>Add New Database User</strong>.
+    - Select <strong>Password</strong> as the <strong>Authentication Method</strong>.
+	- Enter a user name and click <strong>Autogenerate Password</strong>.
+	- Under <strong>Built-in Role </strong>, select <strong>Atlas admin</strong>.
+	- Click <strong>Add User</strong>.
+4. Update Network Access:
+    - In the sidebar, click on <strong>Network Access</strong>.
+    - Click on <strong>Add IP Address</strong>.
+	- Enter a desired whitelisted IP address or enter <strong>0.0.0.0</strong> so the DB can be accessed by anyone.
+	- Click on <strong>Confirm</strong>.
 5. Get the Connection String:
-    - Click on "Connect" in your cluster view.
-    - Select "Connect your application" and copy the connection string. It will look something like this:		
+    - In the sidebar, click on <strong>Database</strong>.
+	- Click on <strong>Connect</strong>.
+	- Select <strong>MongoDB for VS Code</strong>.
+	- Copy your connection string and paste in the `.env` file in your project.
+    - It will look something like this:		
       ```bash
-      mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
+      mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbName>
       ```		
-    - Replace `<username>`, `<password>`, and `<dbname>` with your MongoDB username, password, and database name respectively.
+    - Replace `<username>`, `<password>`, and `<dbName>` with your MongoDB username, password, and database name respectively.		
 6. Install MongoDB Extension for VS Code:
     - Open Visual Studio Code.
     - Go to the Extensions view by clicking the Extensions icon in the Activity Bar on the side of the window.
@@ -107,33 +117,6 @@ Steps to Create a MongoDB Account and Implement it in VS Code:
 7. Connect to MongoDB in VS Code:
     - Open the Command Palette (Ctrl+Shift+P) and type MongoDB: Connect.
     - Select "Add Connection String" and paste the connection string you copied earlier.
-    - Enter the required credentials if prompted.
-
-## Career Path Analysis
-Developing the core functionality to analyze uploaded resumes using OpenAI's API involves several key steps. Below is an explanation of how the Career Path Analysis is generated:
-1. Preparation of the Directive:
-    - A detailed directive is created, instructing the AI on how to analyze the resume. The directive includes specific instructions on generating a structured JSON response, covering various aspects such as summary, career path, strong skills, suggested learning, suggested certifications, industry trends, and salary expectations.
-2. Integration with OpenAI's API:
-    - The application uses the OpenAI API to process the resume content. This involves sending a POST request to the OpenAI endpoint with the prepared directive and the resume text.
-3. Sending the Request:
-    - The POST request includes the following:
-      - Model Specification: The model used for generating responses.
-      - Messages: The directive is a system message and the user's resume text.
-      - Token Limit: A limit on the number of tokens (words and characters) to ensure a concise response.
-      - Headers: Authorization with the API key and content type as JSON.
-4. Receiving the Response:
-    - The OpenAI API processes the request and returns a response containing the AI-generated suggestions. This response includes the career path analysis and other requested details in JSON format.
-5. Parsing the Response:
-    - The application parses the JSON response to extract the relevant information. This involves ensuring the JSON is well-formatted and free of errors.
-6. Providing Career Suggestions:
-    - The parsed response is used to provide the user with career path suggestions. This includes:
-      - Summary: A summary of the resume.
-      - Career Path: An overview of suitable career paths with detailed roles and percentage matches.
-      - Strong Skills: Key skills are categorized with brief descriptions.
-      - Suggested Learning: Additional skills to learn and explanations.
-      - Suggested Certifications: Relevant industry certifications and courses with links.
-      - Industry Trends: Current trends in the industry.
-      - Salary Expectations: Salary ranges for the suggested roles.
 
 ## References
 - <a href="https://www.mongodb.com/docs/" target="_blank">MongoDB Documentation</a>
@@ -147,20 +130,11 @@ Here are some useful VS Code extensions to enhance your development experience:
 - **<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank">Prettier - Code formatter</a>**: Prettier - Code formatter
 
 # CareerCraft User Guide
-Welcome to CareerCraft! This guide will help you navigate and use CareerCraft to discover the best career paths suited for you based on your resume. Follow these simple steps to get started.
-
-## Introduction
-CareerCraft is an easy-to-use web application designed to help you find the best career path based on the content of your resume. By leveraging advanced AI technology, CareerCraft provides personalized career advice and recommendations.
-
-## Accessing CareerCraft
-To access CareerCraft, open your web browser and go to the <a href="https://careercraft-web-app.azurewebsites.net" target="_blank">CareerCraft website</a>.
-
 ## Uploading Your Resume
 Once you are on the CareerCraft homepage, follow these steps to upload your resume:
-1. Locate the Resume Upload Section: On the main page, you will see a section labeled "Upload Your Resume."
-2. Choose a File: Click the "Choose File" button to open a file dialog. Select your resume file from your computer. Supported formats include .pdf and .docx.
-3. Paste Resume Text (Optional): If you prefer, you can paste the text of your resume directly into the provided text box.
-4. Submit Your Resume: After selecting your file or pasting your resume text, click the "Submit" button to upload your resume.
+1. Locate and copy the Resume Upload Section: On the main page, you will see a section labeled "Upload Your Resume."
+2. Paste Resume text into textarea or type any career related information you want to query.
+3. Click the submit button.
 
 ## Viewing Career Suggestions
 After submitting your resume, CareerCraft will process the information and generate career suggestions for you. This may take a few moments. Once the analysis is complete:
