@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config/globals');
-var mongoose = require('mongoose');
 var cors = require('cors');
 
 
@@ -32,16 +31,6 @@ app.use(cors(cors_options));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// Connect to MongoDB
-mongoose
-	.connect(config.ConnectionStrings.MongoDB, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
-	.then((message) => console.log("Connected Successfully!"))
-	.catch((error) => console.log(`Error while connecting: ${error}`));
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

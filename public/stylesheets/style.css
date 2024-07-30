@@ -126,7 +126,7 @@ footer {
 #sendButton {
 	right: 0;
 	top: 0;
-	transform: translate(-75%, 135%);
+	transform: translate(-75%, 40%);
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
@@ -141,14 +141,14 @@ footer {
 	background-color: #059669;
 }
 
-textarea {
-	resize: none;
-	padding-top: 1em !important;
-	padding-bottom: 1em !important;
+input[type="text"] {
+	padding-top: 1.5em !important;
+	padding-bottom: 1.5em !important;
 	padding-right: 5em !important;
+	padding-left: 1.5em !important;
 }
 
-textarea::placeholder {
+input[type="text"]::placeholder {
 	color: #fff !important;
 	opacity: 0.35 !important;
 	padding-top: 3em !important;
