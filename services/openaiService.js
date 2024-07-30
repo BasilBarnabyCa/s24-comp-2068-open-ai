@@ -1,6 +1,7 @@
 const axios = require('axios');
 const config = require('../config/globals.js');
 
+// Prompt for OpenAI
 const directive = `Based on the following resume text, generate a JSON response structured as follows:
 - title (string): Provide a short title. Do not include the person's name or phrase "resume analysis" or the word "resume". Make it the job title that best fits the overall resume.
 - summary (string): Provide a summary of the resume
@@ -14,29 +15,31 @@ Ensure the response is valid JSON without any additional text or formatting char
 `
 
 const openaiService = {
-  getCareerSuggestions: async (resumeText) => {
-    try {
-      const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: directive },
-          { role: 'user', content: resumeText }
-        ],
-        max_tokens: 1500,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${config.ApiKeys.OpenAI}`,
-          'Content-Type': 'application/json',
-        }
-      });
+	getCareerSuggestions: async (resumeText) => {
+		try {
+			// Call OpenAI API
+			const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+				model: 'gpt-4o-mini', // OpenAI model
+				messages: [
+					{ role: 'system', content: directive }, // Sets the context or rules for the model which is defined by the directive
+					{ role: 'user', content: resumeText } // User input, resume text
+				],
+				max_tokens: 1500,
+			}, {
+				headers: {
+					'Authorization': `Bearer ${config.ApiKeys.OpenAI}`, // Bearer token with OpenAI API key
+					'Content-Type': 'application/json', // Content type
+				}
+			});
 
-      return response.data.choices[0].message.content;
-    } catch (error) {
-      console.error('Error fetching data from OpenAI:', error);
-      console.error('Error details:', error.response ? error.response.data : error.message);
-      throw new Error('Could not get suggestions from OpenAI');
-    }
-  }
+			// Return the response
+			return response.data.choices[0].message.content; 
+		} catch (error) {
+			console.error('Error fetching data from OpenAI:', error);
+			console.error('Error details:', error.response ? error.response.data : error.message);
+			throw new Error('Could not get suggestions from OpenAI');
+		}
+	}
 };
 
 module.exports = openaiService;

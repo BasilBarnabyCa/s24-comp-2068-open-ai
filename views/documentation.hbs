@@ -60,7 +60,7 @@
 					</li>
 					<li class="nav-item nav-category inline-block mb-3">
 						<a class="nav-link" href="#api-integration">
-							API Integration
+							API and DB Integration
 						</a>
 						<ul class="navbar-nav navbar-dark ms-4">
 							<li>
@@ -68,23 +68,18 @@
 									OpenAI API Integration
 								</a>
 							</li>
-						</ul>
-					</li>
-					<li class="nav-item nav-category inline-block mb-3">
-						<a class="nav-link" href="#database-management">
-							Database Management
-						</a>
-						<ul class="navbar-nav navbar-dark ms-4">
 							<li>
 								<a class="nav-link" href="#mongodb-setup">
 									MongoDB Setup
 								</a>
 							</li>
-							<li>
-								<a class="nav-link" href="#resume-upload-handling">
-									Resume Upload Handling
-								</a>
-							</li>
+						</ul>
+					</li>
+					<li class="nav-item nav-category inline-block mb-3">
+						<a class="nav-link" href="#other">
+							Other
+						</a>
+						<ul class="navbar-nav navbar-dark ms-4">
 							<li>
 								<a class="nav-link" href="#career-path-analysis">
 									Career Path Analysis
@@ -246,56 +241,51 @@
 					achieve the desired results for this project. It is highly recommended to fund your account for a
 					better experience.</p>
 
-				<h3 id="database-management" class="mt-5">Database Management</h3>
+				<h3 id="other" class="mt-5">Database Management</h3>
 				<h4 id="mongodb-setup" class="mt-3">MongoDB Setup</h4>
 				<p>Configure MongoDB to store user interaction data, including uploaded resumes and generated career
 					path suggestions. This enables the application to maintain a history of user interactions and
 					provide better insights over time.</p>
 
 				<ol>
-					<li>Create a MongoDB Account:
-						<ul>
-							<li><a class="page-link" href="https://www.mongodb.com">MongoDB website</a></li>
-							<li>Click the <strong>Sign In</strong> button at the top right corner and select
-								<strong>Create an Account</strong>.</li>
-							<li>Fill in the required details and complete the registration process.</li>
-						</ul>
-					</li>
-					<li>Create a New Project:
-						<ul>
-							<li>Once logged in, click on <strong>New Project</strong>.</li>
-							<li>Enter a name for your project and click <strong>Next</strong>.</li>
-						</ul>
-					</li>
 					<li>Create a Cluster:
 						<ul>
-							<li>In your new project, click on <strong>Build a Cluster</strong>.</li>
+							<li><a class="page-link" href="https://www.mongodb.com">MongoDB website</a></li>
+							<li>On the Overview page click the <strong>Create</strong> if you want to create a new cluster.</li>
+							<li>Select a tier.</li>
+							<li>Select a cluster name, provider and region of your choice.</li>
+							<li>Click <strong>Create Deployment</strong></li>
+						</ul>
+					</li>
+					<li>Create a Database User:
+						<ul>
+							<li>In the sidebar, click on <strong>Database Access</strong>.</li>
+							<li>Click on <strong>Add New Database User</strong>.</li>
+							<li>Select <strong>Password</strong> as the <strong>Authentication Method</strong>.</li>
+							<li>Enter a user name and click <strong>Autogenerate Password</strong>.</li>
+							<li>Under <strong>Built-in Role </strong>, select <strong>Atlas admin</strong>.</li>
+							<li>Click <strong>Add User</strong>.</li>
+						</ul>
+					</li>
+					<li>Update Network Access
+						<ul>
+							<li>In the sidebar, click on <strong>Database</strong>.</li>
 							<li>Select the <strong>Shared</strong> option for the free tier and choose your preferred
 								cloud provider and region.</li>
 							<li>Click <strong>Create Cluster</strong>.</li>
 						</ul>
 					</li>
-					<li>Configure the Cluster:
+					<li>Get Connection String:
 						<ul>
-							<li>After the cluster is created, click on <strong>Collections</strong> and then on
-								<strong>Add My Own Data</strong>.</li>
-							<li>Enter a database name (e.g., careerCraftDB) and a collection name (e.g.,
-								userInteractions).</li>
-						</ul>
-					</li>
-					<li>Get the Connection String:
-						<ul>
-							<li>Click on <strong>Connect</strong> in your cluster view.</li>
-							<li>Select <strong>Connect your application</strong> and copy the connection string. It will
-								look something like this:</li>
+							<li>Click on <strong>Connect</strong>.</li>
+							<li>Select <strong>MongoDB for VS Code</strong>.</li>
+							<li>Copy your connection string and paste in the `.env` file in your project.</li>
+							<li>It will look something like this:</li>
 							<div class="card code-card mt-3 mb-3">
 								<div class="card-body">
-									<code>mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority</code>
+									<code>mongodb+srv://[username]:[password]@[cluster].mongodb.net/[dbName]</code>
 								</div>
 							</div>
-							<li>Replace <code>&lt;username&gt;</code>, <code>&lt;password&gt;</code>, and
-								<code>&lt;dbname&gt;</code> with your MongoDB username, password, and database name
-								respectively.</li>
 						</ul>
 					</li>
 					<li>Install MongoDB Extension for VS Code:
@@ -312,55 +302,9 @@
 									Connect</strong>.</li>
 							<li>Select <strong>Add Connection String</strong> and paste the connection string you copied
 								earlier.</li>
-							<li>Enter the required credentials if prompted.</li>
-						</ul>
-					</li>
-					<li>Integrate MongoDB with Your Node.js Application:
-						<ul>
-							<li>Ensure you have Mongoose installed in your project:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>npm install mongoose</code>
-								</div>
-							</div>
-							<li>Create a new file <code>config/globals.js</code> to store your MongoDB connection
-								string:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>
-										module.exports = {<br>
-										&nbsp;&nbsp;ConnectionStrings: {<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;MongoDB: 'your_mongodb_connection_string_here'<br>
-										&nbsp;&nbsp;}<br>
-										};<br>
-                    				</code>
-								</div>
-							</div>
-							<li>Update your <code>app.js</code> to include the MongoDB connection:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>
-										const mongoose = require('mongoose');<br>
-										const config = require('./config/globals');<br><br>
-
-										mongoose.connect(config.ConnectionStrings.MongoDB, {<br>
-										&nbsp;&nbsp;useNewUrlParser: true,<br>
-										&nbsp;&nbsp;useUnifiedTopology: true<br>
-										})<br>
-										.then(() => console.log('MongoDB connected successfully'))<br>
-										.catch(err => console.error('MongoDB connection error:', err));<br>
-									</code>
-								</div>
-							</div>
 						</ul>
 					</li>
 				</ol>
-
-
-
-				<h4 id="resume-upload-handling" class="mt-5">Resume Upload Handling</h4>
-				<p>Implement functionality to handle resume file uploads securely and efficiently. Use Multer middleware
-					for managing file uploads and ensure that uploaded files are stored in the designated directory.</p>
 
 				<h4 id="career-path-analysis" class="mt-5">Career Path Analysis</h4>
 				<p>Develop the core functionality to analyze uploaded resumes using OpenAI's API. Process the resume
