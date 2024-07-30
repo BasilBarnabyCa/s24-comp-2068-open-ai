@@ -280,7 +280,7 @@
 							<li>Click <strong>Create Cluster</strong>.</li>
 						</ul>
 					</li>
-					<li>Configure the Cluster:
+					<li>Get Connection String:
 						<ul>
 							<li>Click on <strong>Connect</strong>.</li>
 							<li>Select <strong>MongoDB for VS Code</strong>.</li>
@@ -288,22 +288,9 @@
 							<li>It will look something like this:</li>
 							<div class="card code-card mt-3 mb-3">
 								<div class="card-body">
-									<code>mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority</code>
+									<code>mongodb+srv://[username]:[password]@[cluster].mongodb.net/[dbName]</code>
 								</div>
 							</div>
-						</ul>
-					</li>
-					<li>Get the Connection String:
-						<ul>
-							<li>Click on <strong>Connect</strong> in your cluster view.</li>
-							<li>Select <strong>Connect your application</strong> and copy the connection string. It will
-								look something like this:</li>
-							<div class="card code-card mt-3 mb-3">
-								<div class="card-body">
-									<code>mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbName></code>
-								</div>
-							</div>
-							<li>Replace `<username>`, `<password>`, and `<dbName>` with your MongoDB username, password, and database name respectively.</li>
 						</ul>
 					</li>
 					<li>Install MongoDB Extension for VS Code:
@@ -323,11 +310,6 @@
 						</ul>
 					</li>
 				</ol>
-
-
-				<h4 id="resume-upload-handling" class="mt-5">Resume Upload Handling</h4>
-				<p>Implement functionality to handle resume file uploads securely and efficiently. Use Multer middleware
-					for managing file uploads and ensure that uploaded files are stored in the designated directory.</p>
 
 				<h4 id="career-path-analysis" class="mt-5">Career Path Analysis</h4>
 				<p>Develop the core functionality to analyze uploaded resumes using OpenAI's API. Process the resume
